@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Practice2021.MissingPerson>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<div class="ui attached message">
+    <div class="header" style="margin-left: 550px;">
+        <font size="5">Анкета отправлена. Для перехода в главное меню перейдите по ссылке</font>
+    </div>
+    <p>
+    @Html.ActionLink("Главное меню", "Index", "Home")
+    </p>
+    @*<div class="header" style="margin-left: 500px;">
+            <p><font size="4">Для подачи заявления о пропаже заполните все поля</font></p>
+        </div>*@
+</div>

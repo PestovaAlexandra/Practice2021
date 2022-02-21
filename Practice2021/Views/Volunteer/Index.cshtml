@@ -1,0 +1,192 @@
+﻿@model Practice2021.StaffVolunteer
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@{
+    Layout = "~/Views/Shared/_Layout_ForVolun.cshtml";
+}
+<body>
+    @using (Html.BeginForm())
+    {
+        <h2 class="my-main-heading">Личный кабинет волонтера</h2>
+        //if (ViewBag.Person != null)
+        //{
+        <div class="form-group">
+            <label hidden>ID </label>
+            <div class="col-md-10" hidden>
+                @Html.EditorFor(model => model.VolunteerID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.VolunteerID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <table width="100%" cellspacing="0" cellpadding="5">
+            <tr>
+                <td width="200" valign="top">
+                    <br>
+                    <label style="margin-left:50px"> Добавиться в поисковую группу:</label>
+                    <form class="form-horizontal" style="margin-left:50px" method="post">
+
+                        <div class="form-group">
+                            <p>
+                                Номер мероприятия, к которому прикреплена группа<Br>
+                                @Html.DropDownList("selectedEventID", ViewBag.Events as SelectList, new { id = "event" })
+                            </p>
+                            <label style="margin-left:50px"> Все предстоящие мероприятия:</label>
+                            <div class="col-xs-10">
+                                <input type="submit" value="Показать" name="submitButton" />
+                            </div>
+                        </div>
+
+                        }
+                        <br>
+                        <br>
+                    </form>
+                </td>
+                <td width="200" valign="top">
+                    <p></p>
+                    <form class="form-horizontal" style="margin-left:50px" method="post">
+                        <div class="form-group">
+                            <label> Мои предстоящие мероприятия:</label>
+
+                            <div class="col-xs-10">
+                                <input type="submit" value="Показать предстоящие" name="submitButton" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label> Мои прошедшие мероприятия:</label>
+
+                            <div class="col-xs-10">
+                                <input type="submit" value="Показать прошедшие" name="submitButton" />
+                            </div>
+                        </div>
+
+                        <br>
+                        <div style="margin-left:50px" id="results3"></div>
+
+                        <br>
+                        <br>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        if (ViewBag.Heading == "all")
+        {
+            <h4>Все мероприятия</h4>
+        }
+        else
+        {
+            if (ViewBag.Heading == "myNew")
+            {
+                <h4>Предстоящие мероприятия</h4>
+            }
+            else
+            {
+                if (ViewBag.Heading == "myOld")
+                {
+                    <h4>Прошедшие мероприятия</h4>
+                }
+                else
+                {
+                    if (ViewBag.Heading == "search")
+                    {
+                        <h4>Результат поиска</h4>
+                    }
+                    else
+                    {
+                        <h4>Мероприятия не найдены</h4>
+                    }
+                }
+            }
+        }
+        //if(ViewBag.Heading=="all")
+        <table class="table_style">
+            <tr>
+                <td><p>№ мер-ия</p></td>
+                <td><p>№ группы</p></td>
+                <td><p>Место сбора</p></td>
+                <td><p>Дата и время</p></td>
+                <td><p>ФИО пропавшего</p></td>
+                <td><p>Дата рождения</p></td>
+                @if (ViewBag.Heading != "myOld")
+                {
+                    <td><p>Действие</p></td>
+                }
+
+            </tr>
+
+            @if (ViewBag.Items != null)
+            {
+                foreach (var b in ViewBag.Items)
+                {
+                    <tr>
+                        <td><p>@b.SearchCampaignID
+                        <td><p>@b.GroupOfVolunteer</p></td>
+                        <td><p>@b.MeetingLocation</p></td>
+                        <td><p>@b.DateAndTime</p></td>
+                        <td><p>@b.MissingPerson.Surname @b.MissingPerson.Name @b.MissingPerson.Patronymic</p></td>
+                        <td><p>@b.MissingPerson.DateOfBirth</p></td>
+                        @if (ViewBag.Heading == "myNew")
+                        {
+                            <td><p><a href="@Url.RouteUrl("Default", new { controller = "Volunteer", action = "Delete" })">Отменить заявку на участие</a></p></td>
+                            @*@Html.ActionLink("Отменить заявку на участие", "Change", "SearchCampaigns", new { id = b.SearchCampaignID }, new { @class = "viewDialog", data_dialog_title = "Изменить время и дату" }*@)
+                                            }
+                                                    else
+                                                    {
+                                                        if (ViewBag.Heading == "all" || ViewBag.Headin == "search")
+                                                        {
+                                                            <td><p>@Html.ActionLink("Вступить в группу", "Change", "SearchCampaigns"@*, new { id = b.SearchCampaignID }, new { @class = "viewDialog", data_dialog_title = "Изменить время и дату" }*@)</p></td>
+
+                                                        }
+                                                    }
+                    </tr>
+                }
+
+            }
+
+        </table>
+
+
+
+        @*}*@
+    }
+
+
+
+
+    @*if (ViewBag.Heading == "new")
+        {<h3> Список "новых" пропавших людей </h3>}
+        else
+        {<h3> Список всех пропавших людей </h3>}
+        //Прогрузка списка людей
+
+        <style>
+        </style>
+        <table class="table_style">
+            <tr>
+                <td><p>Фамилия</p></td>
+                <td><p>Имя</p></td>
+                <td><p>Отчество</p></td>
+                <td><p>ID</p></td>
+                <td><p>Добавить мероприятие</p></td>
+            </tr>
+            @if (ViewBag.People != null)
+            {
+                foreach (var b in ViewBag.People)
+                {
+                    <tr>
+                        <td><p>@b.Surname</p></td>
+                        <td><p>@b.Name</p></td>
+                        <td><p>@b.Patronymic</p></td>
+                        <td><p>@b.MissingPersonID</p></td>
+                        <td><p><a href="~/SearchCampaigns/Add/@b.MissingPersonID">Добавить</a></p></td>
+                    </tr>
+                }
+            }
+
+        </table>*@
+
+    <h3></h3>
+
+</body>
+

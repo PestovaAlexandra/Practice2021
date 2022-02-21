@@ -1,0 +1,13 @@
+﻿@model Practice2021.MissingPerson
+@{
+    Layout = null;
+}
+<div>
+    <h3>Тип телосложения:  @Html.DisplayFor(m => m.BodyType)</h3>
+    <p>Внещность: @Html.DisplayFor(m => m.Appearance)</p>
+    <p>Описание одежды: @Html.DisplayFor(m => m.ClothingDescription)</p>
+    <p>Особые приметы: @Html.DisplayFor(m => m.SpecialThings)</p>
+    <p>Дата, когда видели последний раз: @Html.DisplayFor(m => m.DateLastSeen)</p>
+    <p>Место, где видели последний раз: @Html.DisplayFor(m => m.PlaceLastSeen)</p>
+
+</div>

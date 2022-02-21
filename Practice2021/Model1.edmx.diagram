@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ce88c1feb4054eb68582dc2c11d4e282" Name="Diagram1">
+        <EntityTypeShape EntityType="PracticeModel.Equipment" Width="1.5" PointX="4" PointY="6" IsExpanded="false" />
+        <EntityTypeShape EntityType="PracticeModel.FoundStranger" Width="1.5" PointX="9.25" PointY="8" IsExpanded="false" />
+        <EntityTypeShape EntityType="PracticeModel.Gender" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="PracticeModel.Group" Width="1.5" PointX="8.625" PointY="3.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="PracticeModel.MissingPerson" Width="1.5" PointX="2.625" PointY="3.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="PracticeModel.SearchCampaign" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="PracticeModel.Set" Width="1.5" PointX="4" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="PracticeModel.StaffVolunteer" Width="1.5" PointX="8.125" PointY="5.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="PracticeModel.sysdiagram" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="PracticeModel.FK_FoundStranger_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="PracticeModel.FK_MissingPerson_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="PracticeModel.FK_StaffVolunteer_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="PracticeModel.FK_SearchCampaign_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="PracticeModel.FK_SearchCampaign_MissingPerson" ManuallyRouted="false" />
+        <AssociationConnector Association="PracticeModel.FK_SearchCampaign_Set" ManuallyRouted="false" />
+        <AssociationConnector Association="PracticeModel.GroupStaffVolunteer" ManuallyRouted="false" />
+        <AssociationConnector Association="PracticeModel.SetOfEquipment" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

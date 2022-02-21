@@ -1,0 +1,58 @@
+﻿@model Practice2021.StaffVolunteer
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@{
+    Layout = "~/Views/Shared/_Layout_ForVolun.cshtml";
+}
+<body onload="myFunction()">
+    <p style="margin-left:50px">@Html.ActionLink("Вернуться к меню", "AdminPanel", "Volunteer")</p>
+
+    <h1 id="head1">Идет загрузка...</h1>
+    <form class="form-horizontal" style="margin-left:50px" method="post">
+
+        <div class="form-group">
+            <label style="margin-left:50px"> Волонтер: </label>
+
+            @Html.DropDownList("volunteers", ViewBag.Volunteers as SelectList, new { id = "volun" })
+        </div>
+        <div class="form-group">
+            <label> Описание:</label>
+            <textarea id="description_" rows="5" cols="100">
+                        @*@ViewBag.One.Surname;*@            
+            </textarea>
+        </div>
+
+        <div id="results2"></div>
+        <div id="loading1" style="display:none" color="red" ;font-weight:bold;">
+            <p>Идет загрузка... </p>
+        </div>
+    </form>
+    <script>
+        function myFunction() {
+            alert("Страница загружена");
+        }
+        let heading = document.getElementById('head1')
+
+        setTimeout(() => {
+            addStylesTo(heading, 'Информация о волонтерах', 'black', '2rem', 'center')
+        }, 1500)
+
+        function addStylesTo(node, text, color = 'black', fontSize, textAlign) {
+            node.textAlign = textAlign
+            node.color = color
+            node.text = text
+            node.fontSize = fontSize
+
+        }
+    </script>
+    <script>
+        
+
+    </script>
+    @Scripts.Render("/~Scripts.common.js")
+
+</body>
+

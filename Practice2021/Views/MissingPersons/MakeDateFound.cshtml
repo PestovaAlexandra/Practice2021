@@ -1,0 +1,223 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+@{
+    //Layout = "~/Views/Shared/_Layout_ForVolun.cshtml";
+    Layout = null;
+}
+    <head>
+
+        <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+        <link href='@Url.Content("~/Content/themes/base/jquery-ui.css")' rel="stylesheet" type="text/css" />
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <p style="margin-left:50px">@Html.ActionLink("Вернуться к меню", "AdminPanel", "Volunteer")</p>
+        <table width="100%" cellspacing="0" cellpadding="5">
+            <tr>
+                <td width="100" valign="top">
+                    <br>
+                    <label style="margin-left:50px"> Список найденных людей:</label>
+                    <form class="form-horizontal" style="margin-left:50px" method="post">
+
+                        @*@using (Ajax.BeginForm(new AjaxOptions
+                        {
+                            LoadingElementId = "loading",
+                            LoadingElementDuration = 1000,
+
+
+                        }))
+                        {*@
+                        <div class="form-group">
+
+                            <div class="col-xs-10 form-inline">
+                                <input type="submit" value="Показать найденных" name="submitButton" />
+                                <a href="@Url.RouteUrl("Default", new { controller = "MissingPersons", action = "ExportNF" })"> 
+                                <span class="glyphicon glyphicon-download-alt "></span> </a>
+
+                            </div>
+                        </div>
+
+                        <br>
+                        <div style="margin-left:50px" id="results1"></div>
+                        <br>
+                        <div id="loading" style="display:none" color="red" ;font-weight:bold;">
+                            <p>Идет загрузка... </p>
+                        </div>
+                        @*}*@
+                        <br>
+                        <br>
+                    </form>
+                </td>
+                <td width="100" valign="top">
+                    <label style="margin-left:50px"> Список еще не найденных людей:</label>
+
+                    <form class="form-horizontal" style="margin-left:50px" method="post">
+                        <div class="form-group">
+
+                            <div class="col-xs-10 form-inline">
+                                <input type="submit" value="Показать не найденных" name="submitButton" />
+                                <a href="@Url.RouteUrl("Default", new { controller = "MissingPersons", action = "ExportF" })"
+                                   <span class="glyphicon glyphicon-download-alt "></span> </a>
+
+                            </div>
+                        </div>
+
+                        <br>
+                        <div style="margin-left:50px" id="results1"></div>
+                        <br>
+                        <div id="loading" style="display:none" color="red" ;font-weight:bold;">
+                            <p>Идет загрузка... </p>
+                        </div>
+                        @*}*@
+
+
+                    </form>
+                </td>
+                <td width="400" valign="top">
+                    <h4>Добавить дату обнаружения</h4>
+                    <h5>Найти человека по:</h5>
+                    <form class="form-horizontal" method="post">
+                        <div class="form-group">
+                            <label for="inputID" class="col-xs-2 control-label">ID:</label>
+                            <div class="col-xs-10">
+                                <input class="form-control" name="inputID" placeholder="Введите ID">
+                            </div>
+                        </div>
+                        <br>
+                        <p class="col-xs-2 control-label">Личные данные:</p>
+                        <div class="form-inline">
+
+                            <input type="text" name="inputSur" placeholder="Фамилия">
+                            <input type="text" name="inputName" placeholder="Имя">
+                            <input type="text" name="inputPat" placeholder="Отчество">
+                            <p>
+                                Дата рождения:
+                                <input type="date" max="[@DateTime.Today]" name="inputDate">
+                            </p>
+                        </div>
+
+                        <p><input style="margin-left:50px" type="submit" value="Найти" name="submitButton" /></p>
+                    </form>
+
+                </td>
+            </tr>
+        </table>
+
+        @if (ViewBag.Heading == "found")
+        {
+            <h3> Список найденных людей </h3>}
+        else
+
+        {
+            if (ViewBag.Heading == "notfound")
+            {
+                <h3> Список не найденных людей </h3>
+            }
+            else
+            {
+                if (ViewBag.Heading == "search")
+                {
+                    <h3> Результат запроса </h3>
+                }
+                else
+                {
+                    <h3> Совпадений не найдено </h3>
+                }
+            }
+        }
+
+        @if (ViewBag.Add == "no")
+        {
+
+
+            <table class="table_style">
+                <tr>
+                    <td><p>ID</p></td>
+                    <td><p>Фамилия</p></td>
+                    <td><p>Имя</p></td>
+                    <td><p>Отчество</p></td>
+                    <td><p>Дата рождения</p></td>
+                </tr>
+                @if (ViewBag.People != null)
+                {
+                    foreach (var b in ViewBag.People)
+                    {
+                        <tr>
+                            <td><p>@b.MissingPersonID</p></td>
+                            <td><p>@b.Surname</p></td>
+                            <td><p>@b.Name</p></td>
+                            <td><p>@b.Patronymic</p></td>
+                            <td><p>@b.DateOfBirth.ToShortDateString()</p></td>
+                        </tr>
+                    }
+                }
+
+            </table>
+
+
+        }
+        else
+        {
+            <table class="table_style">
+                <tr>
+                    <td><p>ID</p></td>
+                    <td><p>Фамилия</p></td>
+                    <td><p>Имя</p></td>
+                    <td><p>Отчество</p></td>
+                    <td><p>Дата рождения</p></td>
+                    <td><p>Добавить дату, когда нашли</p></td>
+                </tr>
+                @if (ViewBag.People != null)
+                {
+                    foreach (var b in ViewBag.People)
+                    {
+                        <tr>
+                            <td><p>@b.MissingPersonID</p></td>
+                            <td><p>@b.Surname</p></td>
+                            <td><p>@b.Name</p></td>
+                            <td><p>@b.Patronymic</p></td>
+                            <td><p>@b.DateOfBirth.ToShortDateString()</p></td>
+                            <td><p>@Html.ActionLink("Добавить", "Add", "MissingPersons", new { id = b.MissingPersonID }, new { @class = "viewDialog", data_dialog_title = "Добавить дату обнаружения" })</p></td>
+                        </tr>
+                    }
+                }
+
+            </table>
+        }
+
+
+        <script src='@Url.Content("~/Scripts/jquery-1.12.4.min.js")' type="text/javascript"></script>
+        <script src='@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")' type="text/javascript"></script>
+       
+            <script>
+                $(document).ready(function () {
+
+                    $.ajaxSetup({ cache: false });
+
+                    $(".viewDialog").on("click", function (e) {
+                        e.preventDefault();
+
+                        $("<div></div>")
+                            .addClass("dialog")
+                            .appendTo("body")
+                            .dialog({
+                                title: $(this).attr("data-dialog-title"),
+                                close: function () { $(this).remove() },
+                                modal: true,
+                                height: 500,
+                                width: 400,
+                                position: top
+                            })
+                            .load(this.href);
+                    });
+                });
+            </script>
+
+        <h3></h3>
+
+    </body>
+

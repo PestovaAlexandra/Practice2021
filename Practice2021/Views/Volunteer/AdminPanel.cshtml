@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "AdminPanel";
+}
+@{
+    Layout = "~/Views/Shared/_Layout_ForVolun.cshtml";
+}
+
+<h2 class="my-main-heading">Личный кабинет администратора</h2>
+@if (ViewBag.Person != null)
+{
+<h3 class="my-small-heading">@ViewBag.Person.Name @ViewBag.Person.Patronymic, добро пожаловать!</h3>
+}
+<ul class="nav nav-tabs">
+    <li>@Html.ActionLink("Поисковые мероприятия", "Index", "SearchCampaigns")</li>
+    <li>@Html.ActionLink("Оборудование", "Index", "Equipments")</li>
+    <li>@Html.ActionLink("Пропавшие", "MakeDateFound", "MissingPersons")</li>
+    <li>@Html.ActionLink("Волонтеры", "Information", "Volunteer")</li>
+</ul>
+
+

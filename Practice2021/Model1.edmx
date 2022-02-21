@@ -1,0 +1,738 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище PracticeModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="InventoryNumber" />
+          </Key>
+          <Property Name="InventoryNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FoundStranger">
+          <Key>
+            <PropertyRef Name="FoundStrangerID" />
+          </Key>
+          <Property Name="FoundStrangerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Patronymic" Type="nchar" MaxLength="30" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="int" Nullable="false" />
+          <Property Name="CurrentLocation" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="FullAplicant" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nchar" MaxLength="17" Nullable="false" />
+          <Property Name="Image" Type="image" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Name="GenderID" Type="int" Nullable="false" />
+          <Property Name="NameOfGender" Type="nchar" MaxLength="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="GroupStaffVolunteer">
+          <Key>
+            <PropertyRef Name="GroupID" />
+            <PropertyRef Name="StaffVolunteer" />
+          </Key>
+          <Property Name="GroupID" Type="int" Nullable="false" />
+          <Property Name="StaffVolunteer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MissingPerson">
+          <Key>
+            <PropertyRef Name="MissingPersonID" />
+          </Key>
+          <Property Name="MissingPersonID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Patronymic" Type="nchar" MaxLength="30" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="int" Nullable="false" />
+          <Property Name="Growth" Type="tinyint" Nullable="false" />
+          <Property Name="BodyType" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Appearance" Type="nchar" MaxLength="250" Nullable="false" />
+          <Property Name="ClothingDescription" Type="nchar" MaxLength="250" Nullable="false" />
+          <Property Name="SpecialThings" Type="nchar" MaxLength="250" Nullable="false" />
+          <Property Name="DateLastSeen" Type="date" Nullable="false" />
+          <Property Name="PlaceLastSeen" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="PossibleLocation" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateFound" Type="date" />
+          <Property Name="FullApplicant" Type="nchar" MaxLength="60" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Email" Type="nchar" MaxLength="30" />
+          <Property Name="New" Type="bit" Nullable="false" />
+          <Property Name="Image" Type="image" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SearchCampaign">
+          <Key>
+            <PropertyRef Name="SearchCampaignID" />
+          </Key>
+          <Property Name="SearchCampaignID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupOfVolunteer" Type="int" Nullable="false" />
+          <Property Name="SetOfEquipment" Type="int" Nullable="false" />
+          <Property Name="DateAndTime" Type="smalldatetime" Nullable="false" />
+          <Property Name="MeetingLocation" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MissingPersonID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Set">
+          <Key>
+            <PropertyRef Name="SetID" />
+          </Key>
+          <Property Name="SetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SetOfEquipment">
+          <Key>
+            <PropertyRef Name="SetID" />
+            <PropertyRef Name="InventoryNumber" />
+          </Key>
+          <Property Name="SetID" Type="int" Nullable="false" />
+          <Property Name="InventoryNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StaffVolunteer">
+          <Key>
+            <PropertyRef Name="VolunteerID" />
+          </Key>
+          <Property Name="VolunteerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Patronymic" Type="nchar" MaxLength="30" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="17" Nullable="false" />
+          <Property Name="Email" Type="nchar" MaxLength="40" Nullable="false" />
+          <Property Name="Password" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="SuperUser" Type="int" Nullable="false" />
+          <Property Name="BeReady" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_FoundStranger_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FoundStranger" Type="Self.FoundStranger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="FoundStranger">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupStaffVolunteer_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GroupStaffVolunteer" Type="Self.GroupStaffVolunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="GroupStaffVolunteer">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupStaffVolunteer_StaffVolunteer">
+          <End Role="StaffVolunteer" Type="Self.StaffVolunteer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GroupStaffVolunteer" Type="Self.GroupStaffVolunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StaffVolunteer">
+              <PropertyRef Name="VolunteerID" />
+            </Principal>
+            <Dependent Role="GroupStaffVolunteer">
+              <PropertyRef Name="StaffVolunteer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MissingPerson_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="MissingPerson" Type="Self.MissingPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="MissingPerson">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SearchCampaign_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SearchCampaign" Type="Self.SearchCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="SearchCampaign">
+              <PropertyRef Name="GroupOfVolunteer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SearchCampaign_MissingPerson">
+          <End Role="MissingPerson" Type="Self.MissingPerson" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SearchCampaign" Type="Self.SearchCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MissingPerson">
+              <PropertyRef Name="MissingPersonID" />
+            </Principal>
+            <Dependent Role="SearchCampaign">
+              <PropertyRef Name="MissingPersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SearchCampaign_Set">
+          <End Role="Set" Type="Self.Set" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SearchCampaign" Type="Self.SearchCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Set">
+              <PropertyRef Name="SetID" />
+            </Principal>
+            <Dependent Role="SearchCampaign">
+              <PropertyRef Name="SetOfEquipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SetOfEquipment_Equipment">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SetOfEquipment" Type="Self.SetOfEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="InventoryNumber" />
+            </Principal>
+            <Dependent Role="SetOfEquipment">
+              <PropertyRef Name="InventoryNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SetOfEquipment_Set">
+          <End Role="Set" Type="Self.Set" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SetOfEquipment" Type="Self.SetOfEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Set">
+              <PropertyRef Name="SetID" />
+            </Principal>
+            <Dependent Role="SetOfEquipment">
+              <PropertyRef Name="SetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StaffVolunteer_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StaffVolunteer" Type="Self.StaffVolunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="StaffVolunteer">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище PracticeModelContainer">
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FoundStranger" EntityType="Self.FoundStranger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupStaffVolunteer" EntityType="Self.GroupStaffVolunteer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MissingPerson" EntityType="Self.MissingPerson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SearchCampaign" EntityType="Self.SearchCampaign" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Set" EntityType="Self.Set" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SetOfEquipment" EntityType="Self.SetOfEquipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StaffVolunteer" EntityType="Self.StaffVolunteer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FoundStranger_Gender" Association="Self.FK_FoundStranger_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="FoundStranger" EntitySet="FoundStranger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupStaffVolunteer_Group" Association="Self.FK_GroupStaffVolunteer_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="GroupStaffVolunteer" EntitySet="GroupStaffVolunteer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupStaffVolunteer_StaffVolunteer" Association="Self.FK_GroupStaffVolunteer_StaffVolunteer">
+            <End Role="StaffVolunteer" EntitySet="StaffVolunteer" />
+            <End Role="GroupStaffVolunteer" EntitySet="GroupStaffVolunteer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MissingPerson_Gender" Association="Self.FK_MissingPerson_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="MissingPerson" EntitySet="MissingPerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SearchCampaign_Group" Association="Self.FK_SearchCampaign_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="SearchCampaign" EntitySet="SearchCampaign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SearchCampaign_MissingPerson" Association="Self.FK_SearchCampaign_MissingPerson">
+            <End Role="MissingPerson" EntitySet="MissingPerson" />
+            <End Role="SearchCampaign" EntitySet="SearchCampaign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SearchCampaign_Set" Association="Self.FK_SearchCampaign_Set">
+            <End Role="Set" EntitySet="Set" />
+            <End Role="SearchCampaign" EntitySet="SearchCampaign" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SetOfEquipment_Equipment" Association="Self.FK_SetOfEquipment_Equipment">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="SetOfEquipment" EntitySet="SetOfEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SetOfEquipment_Set" Association="Self.FK_SetOfEquipment_Set">
+            <End Role="Set" EntitySet="Set" />
+            <End Role="SetOfEquipment" EntitySet="SetOfEquipment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StaffVolunteer_Gender" Association="Self.FK_StaffVolunteer_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="StaffVolunteer" EntitySet="StaffVolunteer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PracticeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="InventoryNumber" />
+          </Key>
+          <Property Name="InventoryNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sets" Relationship="Self.SetOfEquipment" FromRole="Equipment" ToRole="Set" />
+        </EntityType>
+        <EntityType Name="FoundStranger">
+          <Key>
+            <PropertyRef Name="FoundStrangerID" />
+          </Key>
+          <Property Name="FoundStrangerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
+          <Property Name="CurrentLocation" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="FullAplicant" Type="String" MaxLength="60" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="17" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Gender1" Relationship="Self.FK_FoundStranger_Gender" FromRole="FoundStranger" ToRole="Gender" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Name="GenderID" Type="Int32" Nullable="false" />
+          <Property Name="NameOfGender" Type="String" MaxLength="7" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="FoundStrangers" Relationship="Self.FK_FoundStranger_Gender" FromRole="Gender" ToRole="FoundStranger" />
+          <NavigationProperty Name="MissingPersons" Relationship="Self.FK_MissingPerson_Gender" FromRole="Gender" ToRole="MissingPerson" />
+          <NavigationProperty Name="StaffVolunteers" Relationship="Self.FK_StaffVolunteer_Gender" FromRole="Gender" ToRole="StaffVolunteer" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupID" />
+          </Key>
+          <Property Name="GroupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="SearchCampaigns" Relationship="Self.FK_SearchCampaign_Group" FromRole="Group" ToRole="SearchCampaign" />
+          <NavigationProperty Name="StaffVolunteers" Relationship="Self.GroupStaffVolunteer" FromRole="Group" ToRole="StaffVolunteer" />
+        </EntityType>
+        <EntityType Name="MissingPerson">
+          <Key>
+            <PropertyRef Name="MissingPersonID" />
+          </Key>
+          <Property Name="MissingPersonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
+          <Property Name="Growth" Type="Byte" Nullable="false" />
+          <Property Name="BodyType" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Appearance" Type="String" MaxLength="250" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ClothingDescription" Type="String" MaxLength="250" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="SpecialThings" Type="String" MaxLength="250" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="DateLastSeen" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PlaceLastSeen" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PossibleLocation" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="DateFound" Type="DateTime" Precision="0" />
+          <Property Name="FullApplicant" Type="String" MaxLength="60" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="New" Type="Boolean" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="Gender1" Relationship="Self.FK_MissingPerson_Gender" FromRole="MissingPerson" ToRole="Gender" />
+          <NavigationProperty Name="SearchCampaigns" Relationship="Self.FK_SearchCampaign_MissingPerson" FromRole="MissingPerson" ToRole="SearchCampaign" />
+        </EntityType>
+        <EntityType Name="SearchCampaign">
+          <Key>
+            <PropertyRef Name="SearchCampaignID" />
+          </Key>
+          <Property Name="SearchCampaignID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupOfVolunteer" Type="Int32" Nullable="false" />
+          <Property Name="SetOfEquipment" Type="Int32" Nullable="false" />
+          <Property Name="DateAndTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="MeetingLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MissingPersonID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_SearchCampaign_Group" FromRole="SearchCampaign" ToRole="Group" />
+          <NavigationProperty Name="MissingPerson" Relationship="Self.FK_SearchCampaign_MissingPerson" FromRole="SearchCampaign" ToRole="MissingPerson" />
+          <NavigationProperty Name="Set" Relationship="Self.FK_SearchCampaign_Set" FromRole="SearchCampaign" ToRole="Set" />
+        </EntityType>
+        <EntityType Name="Set">
+          <Key>
+            <PropertyRef Name="SetID" />
+          </Key>
+          <Property Name="SetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="SearchCampaigns" Relationship="Self.FK_SearchCampaign_Set" FromRole="Set" ToRole="SearchCampaign" />
+          <NavigationProperty Name="Equipments" Relationship="Self.SetOfEquipment" FromRole="Set" ToRole="Equipment" />
+        </EntityType>
+        <EntityType Name="StaffVolunteer">
+          <Key>
+            <PropertyRef Name="VolunteerID" />
+          </Key>
+          <Property Name="VolunteerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="17" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="40" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="SuperUser" Type="Int32" Nullable="false" />
+          <Property Name="BeReady" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Gender1" Relationship="Self.FK_StaffVolunteer_Gender" FromRole="StaffVolunteer" ToRole="Gender" />
+          <NavigationProperty Name="Groups" Relationship="Self.GroupStaffVolunteer" FromRole="StaffVolunteer" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_FoundStranger_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FoundStranger" Type="Self.FoundStranger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="FoundStranger">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MissingPerson_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="MissingPerson" Type="Self.MissingPerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="MissingPerson">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StaffVolunteer_Gender">
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StaffVolunteer" Type="Self.StaffVolunteer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="StaffVolunteer">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SearchCampaign_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SearchCampaign" Type="Self.SearchCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupID" />
+            </Principal>
+            <Dependent Role="SearchCampaign">
+              <PropertyRef Name="GroupOfVolunteer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SearchCampaign_MissingPerson">
+          <End Role="MissingPerson" Type="Self.MissingPerson" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SearchCampaign" Type="Self.SearchCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MissingPerson">
+              <PropertyRef Name="MissingPersonID" />
+            </Principal>
+            <Dependent Role="SearchCampaign">
+              <PropertyRef Name="MissingPersonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SearchCampaign_Set">
+          <End Role="Set" Type="Self.Set" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SearchCampaign" Type="Self.SearchCampaign" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Set">
+              <PropertyRef Name="SetID" />
+            </Principal>
+            <Dependent Role="SearchCampaign">
+              <PropertyRef Name="SetOfEquipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GroupStaffVolunteer">
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <End Role="StaffVolunteer" Type="Self.StaffVolunteer" Multiplicity="*" />
+        </Association>
+        <Association Name="SetOfEquipment">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="*" />
+          <End Role="Set" Type="Self.Set" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="CourceWork1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Equipments" EntityType="Self.Equipment" />
+          <EntitySet Name="FoundStrangers" EntityType="Self.FoundStranger" />
+          <EntitySet Name="Genders" EntityType="Self.Gender" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="MissingPersons" EntityType="Self.MissingPerson" />
+          <EntitySet Name="SearchCampaigns" EntityType="Self.SearchCampaign" />
+          <EntitySet Name="Sets" EntityType="Self.Set" />
+          <EntitySet Name="StaffVolunteers" EntityType="Self.StaffVolunteer" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_FoundStranger_Gender" Association="Self.FK_FoundStranger_Gender">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="FoundStranger" EntitySet="FoundStrangers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MissingPerson_Gender" Association="Self.FK_MissingPerson_Gender">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="MissingPerson" EntitySet="MissingPersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StaffVolunteer_Gender" Association="Self.FK_StaffVolunteer_Gender">
+            <End Role="Gender" EntitySet="Genders" />
+            <End Role="StaffVolunteer" EntitySet="StaffVolunteers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SearchCampaign_Group" Association="Self.FK_SearchCampaign_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="SearchCampaign" EntitySet="SearchCampaigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SearchCampaign_MissingPerson" Association="Self.FK_SearchCampaign_MissingPerson">
+            <End Role="MissingPerson" EntitySet="MissingPersons" />
+            <End Role="SearchCampaign" EntitySet="SearchCampaigns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SearchCampaign_Set" Association="Self.FK_SearchCampaign_Set">
+            <End Role="Set" EntitySet="Sets" />
+            <End Role="SearchCampaign" EntitySet="SearchCampaigns" />
+          </AssociationSet>
+          <AssociationSet Name="GroupStaffVolunteer" Association="Self.GroupStaffVolunteer">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="StaffVolunteer" EntitySet="StaffVolunteers" />
+          </AssociationSet>
+          <AssociationSet Name="SetOfEquipment" Association="Self.SetOfEquipment">
+            <End Role="Equipment" EntitySet="Equipments" />
+            <End Role="Set" EntitySet="Sets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PracticeModelContainer" CdmEntityContainer="CourceWork1Entities">
+          <EntitySetMapping Name="Equipments">
+            <EntityTypeMapping TypeName="PracticeModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="InventoryNumber" ColumnName="InventoryNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FoundStrangers">
+            <EntityTypeMapping TypeName="PracticeModel.FoundStranger">
+              <MappingFragment StoreEntitySet="FoundStranger">
+                <ScalarProperty Name="FoundStrangerID" ColumnName="FoundStrangerID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="CurrentLocation" ColumnName="CurrentLocation" />
+                <ScalarProperty Name="FullAplicant" ColumnName="FullAplicant" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="PracticeModel.Gender">
+              <MappingFragment StoreEntitySet="Gender">
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+                <ScalarProperty Name="NameOfGender" ColumnName="NameOfGender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="PracticeModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MissingPersons">
+            <EntityTypeMapping TypeName="PracticeModel.MissingPerson">
+              <MappingFragment StoreEntitySet="MissingPerson">
+                <ScalarProperty Name="MissingPersonID" ColumnName="MissingPersonID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Growth" ColumnName="Growth" />
+                <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+                <ScalarProperty Name="Appearance" ColumnName="Appearance" />
+                <ScalarProperty Name="ClothingDescription" ColumnName="ClothingDescription" />
+                <ScalarProperty Name="SpecialThings" ColumnName="SpecialThings" />
+                <ScalarProperty Name="DateLastSeen" ColumnName="DateLastSeen" />
+                <ScalarProperty Name="PlaceLastSeen" ColumnName="PlaceLastSeen" />
+                <ScalarProperty Name="PossibleLocation" ColumnName="PossibleLocation" />
+                <ScalarProperty Name="DateFound" ColumnName="DateFound" />
+                <ScalarProperty Name="FullApplicant" ColumnName="FullApplicant" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="New" ColumnName="New" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SearchCampaigns">
+            <EntityTypeMapping TypeName="PracticeModel.SearchCampaign">
+              <MappingFragment StoreEntitySet="SearchCampaign">
+                <ScalarProperty Name="SearchCampaignID" ColumnName="SearchCampaignID" />
+                <ScalarProperty Name="GroupOfVolunteer" ColumnName="GroupOfVolunteer" />
+                <ScalarProperty Name="SetOfEquipment" ColumnName="SetOfEquipment" />
+                <ScalarProperty Name="DateAndTime" ColumnName="DateAndTime" />
+                <ScalarProperty Name="MeetingLocation" ColumnName="MeetingLocation" />
+                <ScalarProperty Name="MissingPersonID" ColumnName="MissingPersonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sets">
+            <EntityTypeMapping TypeName="PracticeModel.Set">
+              <MappingFragment StoreEntitySet="Set">
+                <ScalarProperty Name="SetID" ColumnName="SetID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StaffVolunteers">
+            <EntityTypeMapping TypeName="PracticeModel.StaffVolunteer">
+              <MappingFragment StoreEntitySet="StaffVolunteer">
+                <ScalarProperty Name="VolunteerID" ColumnName="VolunteerID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="SuperUser" ColumnName="SuperUser" />
+                <ScalarProperty Name="BeReady" ColumnName="BeReady" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PracticeModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="GroupStaffVolunteer" TypeName="PracticeModel.GroupStaffVolunteer" StoreEntitySet="GroupStaffVolunteer">
+            <EndProperty Name="Group">
+              <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+            </EndProperty>
+            <EndProperty Name="StaffVolunteer">
+              <ScalarProperty Name="VolunteerID" ColumnName="StaffVolunteer" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SetOfEquipment" TypeName="PracticeModel.SetOfEquipment" StoreEntitySet="SetOfEquipment">
+            <EndProperty Name="Equipment">
+              <ScalarProperty Name="InventoryNumber" ColumnName="InventoryNumber" />
+            </EndProperty>
+            <EndProperty Name="Set">
+              <ScalarProperty Name="SetID" ColumnName="SetID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

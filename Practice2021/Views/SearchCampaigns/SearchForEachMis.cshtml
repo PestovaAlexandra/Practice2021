@@ -1,0 +1,23 @@
+﻿@model Practice2021.SearchCampaign
+
+@{
+    Layout = null;
+}
+<table id="viewTable" class="table thead caption td th ">
+    <tr>
+        <td><p>Место сбора</p></td>
+        <td><p>Дата и время</p></td>
+    </tr>
+    @*@if ( ! Page.IsPostBack )
+        {*@
+    @foreach (var b in ViewBag.Companies)
+    {
+        <tr>
+            <td><p>@b.MeetingLocation</p></td>
+            <td><p>@b.DateAndTime.ToShortDateString()</p></td>
+        </tr>
+        @*@ViewBag.People== null;*@
+    }
+    @*}*@
+</table>
+

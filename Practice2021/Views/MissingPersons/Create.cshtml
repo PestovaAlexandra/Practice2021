@@ -1,0 +1,173 @@
+﻿@model Practice2021.MissingPerson
+
+@{
+    ViewBag.Title = "Create";
+}
+<script type="text/javascript">
+    function OnSuccess(data) {
+        alert("Подтвердите создание заявки на поиски.\nПосле подтверждения вы перейдете на главную страницу");
+    }
+    function OnFailure(request, error) {
+        $("#results").html("Книги указанного автора не содержатся в базе данных.");
+    }
+    function OnComplete(request, status) {
+        alert("Статус запроса : " + status);
+    }
+</script>
+
+
+<div class="ui attached message">
+    <div class="header" style="margin-left: 550px;">
+        <font size="5">Анкета пропавшего человека</font>
+    </div>
+    <div class="header" style="margin-left: 500px;">
+        <p><font size="4">Для подачи заявления о пропаже заполните все поля</font></p>
+    </div>
+</div>
+@*@using (Ajax.BeginForm("Create", "MissingPersons", FormMethod.Post, new AjaxOptions { LoadingElementId = "loading", LoadingElementDuration = 1000, UpdateTargetId = "results", Confirm = "Сохранить данные?" }, new { enctype = "multipart/form-data" }))
+{*@
+    @Html.AntiForgeryToken()
+    <form enctype="multipart/form-data" method="post">
+        <div class="form-horizontal" style="margin-left:50px">
+            <h4>Данные пропавшего человека</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group" >
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", placeholder = "Фамилия" } })
+                    @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Имя" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Patronymic, new { htmlAttributes = new { @class = "form-control", placeholder = "Отчество" } })
+                    @Html.ValidationMessageFor(model => model.Patronymic, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br>
+            <div>Дата рождения </div>
+            <input type="date" name="DateOfBirth" value="1990-01-01" max="[@DateTime.Today]" required="required">
+            <br />
+            <br />
+            <br>
+            <div class="form-group">
+                <div>Пол </div>
+                <p>
+                 @Html.DropDownList("selectedGenderID", (SelectList)ViewBag.Gender)
+                </p>
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div>Рост в сантиметрах</div>
+                    @Html.EditorFor(model => model.Growth, new { htmlAttributes = new { @class = "form-control", placeholder = "Рост", value = "170" } })
+                    @Html.ValidationMessageFor(model => model.Growth, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div>Тип телосложения</div>
+                    @Html.DropDownList("selectedBodyType", (SelectList)ViewBag.Body)
+                </div>
+            </div>
+            <br><br />
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div>Описание внешности</div>
+                    @Html.EditorFor(model => model.Appearance, new { htmlAttributes = new { @class = "form-control", style = "Width:400px", placeholder = "цвет волос, цвет глаз и тп" } })
+                    @Html.ValidationMessageFor(model => model.Appearance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div>Описание одежды</div>
+                    @Html.EditorFor(model => model.ClothingDescription, new { htmlAttributes = new { @class = "form-control", style = "Width:400px", placeholder = "черная куртка, синяя шапка и тп" } })
+                    @Html.ValidationMessageFor(model => model.ClothingDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div>Особые приметы</div>
+                    @Html.EditorFor(model => model.SpecialThings, new { htmlAttributes = new { @class = "form-control", style = "Width:400px", placeholder = "родимые пятна, татуировки, шрамы и тп" } })
+                    @Html.ValidationMessageFor(model => model.SpecialThings, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div>Дата, когда последний раз видели</div>
+            <input type="date" name="DateLastSeen" value="[@DateTime.Today]" max="[@DateTime.Today]" ," required="required">
+            <br><br />
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div>Место, где последний раз видели</div>
+                    @Html.EditorFor(model => model.PlaceLastSeen, new { htmlAttributes = new { @class = "form-control", style = "Width:400px", placeholder = "г. Пермь, пл. Карла Маркса" } })
+                    @Html.ValidationMessageFor(model => model.PlaceLastSeen, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div>Возможное местоположение</div>
+                    @Html.EditorFor(model => model.PossibleLocation, new { htmlAttributes = new { @class = "form-control", style = "Width:400px", placeholder = "г. Пермь, мкр. Гайва" } })
+                    @Html.ValidationMessageFor(model => model.PossibleLocation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br><br />
+            <h4>Контактная информация </h4>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div>ФИО заявителя</div>
+                    @Html.EditorFor(model => model.FullApplicant, new { htmlAttributes = new { @class = "form-control", placeholder = "Иванов Иван Иванович" } })
+                    @Html.ValidationMessageFor(model => model.FullApplicant, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div> Номер телефона </div>
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "89631234567" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <div> Электронная почта</div>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "name@yandex.ru" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2", accept = "image/jpeg" })
+                <div class="col-md-10">
+                    <input type="file" name="uploadImage" value="Загрузить" />
+                </div>
+            </div>
+            <br><br />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Отправить анкету" @*class="btn btn-default"*@ />
+                </div>
+            </div>
+
+            <div id="loading" style="display:none" color="maroon" size=4>
+                <p>Идет загрузка... </p>
+            </div>
+
+            <div id="results" color="green" size=4>
+
+            </div>
+        </div>
+    </form>
+@*}*@
+
+<div style="margin-left:50px">
+    <p>Вернуться на @Html.ActionLink("главную страницу", "Index",  "Home")</p>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

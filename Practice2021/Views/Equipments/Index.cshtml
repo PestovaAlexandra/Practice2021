@@ -1,0 +1,218 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+@{
+    Layout = "~/Views/Shared/_Layout_ForVolun.cshtml";
+}
+    <head>
+        <script src="~/Scripts/scr.js"></script>
+    </head>
+    <body>
+        <p style="margin-left:50px">@Html.ActionLink("Вернуться к меню", "AdminPanel", "Volunteer")</p>
+        <h1 class="first"> Это проверка</h1>
+        <table width="100%" cellspacing="0" cellpadding="5">
+            <tr>
+                <td width="100" valign="top">
+                    <br>
+                    <label style="margin-left:50px"> Добавить новый экземпляр оборудования в базу:</label>
+                    @*<form class="form-horizontal" style="margin-left:50px">*@
+                    @*<form class="form-horizontal" style="margin-left:50px" action="/Equipments/ResultOfAddingNew" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results1" id="form1" method="post" data-ajax-loading="loading1" data-ajax-confirm="true">*@
+                    <form class="form-horizontal" style="margin-left:50px" action="/Equipments/ResultOfAddingNew" method="post">
+                        <div class="form-group">
+                            <p>
+                                Описание<Br>
+                                <textarea name="newEquip" rows="3" cols="80"></textarea>
+                            </p>
+                            <div class="col-xs-10">
+                                <input type="submit" value="Добавить" name="submitButton" />
+                            </div>
+                        </div>
+                        <br>
+                        <div style="margin-left:50px" id="results1"></div>
+                        <div id="loading1" style="display:none" color="red" ;font-weight:bold;">
+                            <p>Идет загрузка... </p>
+                        </div>
+                    </form>
+                    <br>
+                    <br>
+                    <label> Добавить оборудование в группу:</label>
+                    <form class="form-horizontal" style="margin-left:50px" action="/Equipments/ResultOfAddingInSet" method="post">
+
+                        <div class="form-group">
+                            <label style="margin-left:50px"> Выбрать группу:</label>
+
+                            @Html.DropDownList("selectedGroupID", ViewBag.Groups as SelectList, new { id = "group" })
+                        </div>
+                        <div class="form-group">
+                            <label> Описание:</label>
+                            <textarea id="description1" rows="5" cols="80">
+                                    
+                                                        </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label> ID оборудования:</label>
+
+                            @Html.DropDownList("selectedEqID", ViewBag.Equip as SelectList, new { id = "set" })
+                        </div>
+                        <div class="form-group">
+                            <label> Описание:</label>
+                            <textarea id="description2" rows="5" cols="80">
+                                    
+                                    </textarea>
+                        </div>
+                        <div class="col-xs-10">
+                            <input type="submit" value="Добавить" name="submitButton" />
+                        </div>
+                        <br>
+                        <div id="results2"></div>
+                        <div id="loading1" style="display:none" color="red" ;font-weight:bold;">
+                            <p>Идет загрузка... </p>
+                        </div>
+                    </form>
+
+                </td>
+                <td width="400" valign="top">
+                    <label style="margin-left:50px">ID оборудования:</label>
+                    <form class="form-horizontal" style="margin-left:50px" action="/Equipments/ResultOfDelete" method="post">
+
+                        @*<form class="form-horizontal" style="margin-left:50px" action="/Equipments/ResultOfDelete" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#results1" id="form1" method="post" data-ajax-loading="loading1" data-ajax-confirm="true">*@
+                        <div class="form-group">
+                            @Html.DropDownList("selectedEqIDForDel", ViewBag.Equip as SelectList, new { id = "setToDel" })
+                            
+                            <br>
+                          
+                            <p></p>
+                            <label> Описание:</label>
+                            <textarea id="description3" rows="5" cols="80">
+                                    
+                                                        </textarea>
+                        </div>
+                        <input type="submit" value="Удалить" name="submitButton" />
+
+                        <br>
+                        <div style="margin-left:50px" id="results3"></div>
+                        <br>
+                        <br>
+                    </form>
+
+
+                    <form class="form-horizontal" style="margin-left:50px" method="post">
+                        <label style="margin-left:50px">Открыть базу оборудования:</label>
+                        <input type="submit" value="Открыть" name="submitButton" />
+                        @if (ViewBag.Heading == "foralll")
+                        {
+                            <h5>Оборудование в наборе</h5>
+                        }
+                        else
+                        {
+                            <h5>Все оборудование</h5>
+                        }
+                        <table class="table_style">
+                            <tr>
+                                <td><p>ID </p></td>
+                                <td><p>Описание</p></td>
+                                @if (ViewBag.Action != "no")
+                                {
+                                    <td><p>Действие</p></td>
+                                }
+
+                            </tr>
+                            @if (ViewBag.Items != null && ViewBag.Heading == "forsearch")
+                            {
+                                foreach (var b in ViewBag.Items)
+                                {
+                                    <tr>
+                                        <td><p>@b.Equipments.InventoryNumber</p></td>
+                                        <td><p>@b.Equipments.Name</p></td>
+
+                                        <td><p>@Html.ActionLink("Удалить", "DeleteFromSet", "Equipments")</p></td>
+
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                if (ViewBag.Items != null && ViewBag.Heading == "forall")
+                                {
+                                    foreach (var b in ViewBag.Items)
+                                    {
+                                        <tr>
+                                            @*  *@
+                                        <td><p>@b.InventoryNumber</p></td>
+                                        <td><p>@b.Name</p></td>
+                                        <td><p>Удалить</p></td>
+                                        @*<td><p>@Html.ActionLink("Удалить", "DeleteFromBD", "Equipments")</p></td>*@
+
+                                    </tr>
+                                }
+                            }
+                        }
+
+                        </table>
+
+
+                    </form>
+
+                </td>
+            </tr>
+        </table>
+        }
+        @section scripts
+                {
+            <script type="text/javascript">
+                    $(function () {
+
+                        $('#group').change(function()
+                        {
+                            // получаем выбранный id
+                            var id = $(this).val();
+                            $.ajax({
+                                type: 'GET',
+                                url: '@Url.Action("Details","Groups")/' + id,
+                                success: function (data) {
+
+                                    // заменяем содержимое присланным частичным представлением
+                                    $('#description1').text(data);
+                                }
+                            });
+                        });
+                        $('#set').change(function()
+                        {
+                            // получаем выбранный id
+                            var id = $(this).val();
+                            $.ajax({
+                                type: 'GET',
+                                url: '@Url.Action("GetName","Equipments")/' + id,
+                                success: function (data) {
+                                    // заменяем содержимое присланным частичным представлением
+                                    $('#description2').text(data);
+                                }
+                            });
+                        });
+                        $('#setToDel').change(function()
+                        {
+                            // получаем выбранный id
+                            var id = $(this).val();
+                            $.ajax({
+                                type: ' GET',
+                                url: '@Url.Action("GetName","Equipments")/' + id,
+                                success: function (data) {
+                                    // заменяем содержимое присланным частичным представлением
+                                    $('#description3').text(data);
+                                }
+                            });
+                        });
+                    })
+            
+                //$(document).ready(function () {
+
+                //    $('.first').text("Проверка пройдена");
+                //});
+            </script>
+        }
+
+        <h3></h3>
+        @*<script src="~/scripts/scr.js"></script>*@
+    </body>

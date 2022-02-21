@@ -1,0 +1,20 @@
+﻿
+@model Practice2021.StaffVolunteer
+@if ((bool)ViewBag.Ok == true)
+{
+    <Font color="green" size=4>
+        Вы успешно зарегистрировались.
+        <p>
+            Вы можете авторизоваться под вашим выбранным именем пользователя,
+            <br>перейдя по ссылке @Html.ActionLink("Войти", "Auth", "Volunteer")
+        </p>
+    </Font>
+
+}
+@if ((bool)ViewBag.Ok == false)
+{
+    <Font color="maroon" size=4>
+        Пользователь с почтой @Model.Email уже зарегистрирован в системе.<br>
+        Пожалуйста, введите другую.
+    </Font>
+}

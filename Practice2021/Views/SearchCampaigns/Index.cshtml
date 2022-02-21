@@ -1,0 +1,128 @@
+﻿@*@model Practice2021.StaffVolunteer*@
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@{
+    Layout = "~/Views/Shared/_Layout_ForVolun.cshtml";
+}
+    <body>
+        <p>@Html.ActionLink("Вернуться к меню", "AdminPanel", "Volunteer")</p>
+
+        @using (Html.BeginForm())
+        {
+            <table width="100%" cellspacing="0" cellpadding="5">
+                <tr>
+                    <td width="100" valign="top">
+                        <form class="form-horizontal" method="post">
+                            <div class="form-group">
+                                <label style="margin-left:50px"> Показать список:</label>
+                                <br />
+                                <p><input style="margin-left:50px" class="form-check-input" value="NewMis" type="radio" name="WayOfShow" id="NewMis"> "Новых пропавших" людей</p>
+                                <p><input style="margin-left:50px" class="form-check-input" value="AllMis" type="radio" name="WayOfShow" id="AllMis" checked> Всех пропавших пропавших</p>
+                            </div>
+                            <br>
+                            <input style="margin-left:50px" type="submit" value="Показать" name="submitButton" />
+                        </form>
+                    </td>
+                    <td width="400" valign="top">
+                        <h3>Найти человека по:</h3>
+                        <form class="form-horizontal" method="post">
+                            <div class="form-group">
+                                <label for="inputID" class="col-xs-2 control-label">ID:</label>
+                                <div class="col-xs-10">
+                                    <input class="form-control" name="inputID" placeholder="Введите ID">
+                                </div>
+                            </div>
+                            <br>
+                            <p class="col-xs-2 control-label">Личные данные:</p>
+                            <div class="form-inline">
+
+                                <input type="text" name="inputSur" placeholder="Фамилия">
+                                <input type="text" name="inputName" placeholder="Имя">
+                                <input type="text" name="inputPat" placeholder="Отчество">
+                                Дата рождения:
+                                <input type="date" max="[@DateTime.Today]" name="inputDate">
+                            </div>
+                            <input style="margin-left:50px" type="submit" value="Найти" name="submitButton" />
+                        </form>
+
+
+
+                    </td>
+                </tr>
+            </table>
+            if (ViewBag.Heading == "new")
+            {
+                <h3> Список "новых" пропавших людей </h3>}
+            else
+
+            {
+                if (ViewBag.Heading == "all")
+                {
+                    <h3> Список всех пропавших людей </h3>
+                }
+                else
+                {
+                    if (ViewBag.Heading == "search")
+                    {
+                        <h3> Результат запроса </h3>
+                    }
+                    else
+                    {
+                        <h3> Совпадений не найдено </h3>
+                    }
+                }
+            }
+            //Прогрузка списка людей
+            <table width="100%" cellspacing="0" cellpadding="5" >
+                <tr>
+                    <td width="200" valign="top">
+                        <table class="table_style">
+                            <tr>
+                                <td><p>Фамилия</p></td>
+                                <td><p>Имя</p></td>
+                                <td><p>Отчество</p></td>
+                                <td><p>ID</p></td>
+                                <td><p>Добавить мероприятие</p></td>
+                            </tr>
+                            @if (ViewBag.People != null)
+                            {
+                                foreach (var b in ViewBag.People)
+                                {
+                            <tr>
+                                <td><p>@b.Surname</p></td>
+                                <td><p>@b.Name</p></td>
+                                <td><p>@b.Patronymic</p></td>
+                                <td><p>@b.MissingPersonID</p></td>
+                                @*<td><p><a href="~/SearchCampaigns/Add/@b.MissingPersonID">Добавить</a></p></td>*@
+                                <td><p> @Html.ActionLink("Добавить","Add","SearchCampaigns", new { id = b.MissingPersonID }, null)</p></td>
+                            </tr>
+                                }
+                            }
+
+                        </table>
+
+                    </td>
+                    <td width="300" valign="top">
+                        <form >
+                           
+                                <label @*class="col-xs-2 control-label"*@ >
+                                    Изменить место сбора, дату и время мероприятия
+                                    Перейдите по ссылке, чтобы продолжить
+                                </label>
+                                <p>
+                                    @Html.ActionLink("Перейти", "Edit", "SearchCampaigns")
+                                </p>
+                            
+
+                        </form>
+
+
+                    </td>
+                </tr>
+            </table>
+        }
+    </body>

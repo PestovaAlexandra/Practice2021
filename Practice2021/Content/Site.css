@@ -1,0 +1,170 @@
+﻿/*body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}*/
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}  
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.field-validation-error {
+    color: darkred;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.input-validation-error {
+    border: 1px solid #006699;
+    background-color: lightgray;
+}
+.my-main-heading {
+/*    text-indent: 300px;
+*/    color: black;
+    /*font-weight: 700;*/
+    text-align: center;
+}
+
+.c {
+    text-align: center;
+}
+.site-footer p {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 20px;
+    margin:50px 0px 0px 0px;
+}
+.container {
+    width: 510px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Arial", sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    color: #444444;
+}
+
+.features {
+    width: 800px;
+    margin: 0 auto 30px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+    .features p {
+        display: inline-block;
+        vertical-align: top;
+        width: 30%;
+        margin: 0 5px;
+        background-repeat: no-repeat;
+        background-position: center top;
+        text-align: center;
+    }
+
+#head {
+    margin-left: 50px;
+    margin-bottom: 100px;
+    font-size: 18pt;
+    color: black;
+    font-weight: 700;
+    text-align: center;
+}
+/*div {
+    margin-left: 30px;
+    margin-bottom: 50px;
+    font-size: 14pt;
+}*/
+/* СТИЛЬ ДЛЯ ТАБЛИЦЫ */
+
+.table_style {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    width: 700px;
+    text-align: left; /*Выравнивание по левому краю*/
+    border-collapse: collapse; /* Границы вокруг ячеек. Отображать двойные линии как одинарные.*/
+    margin: 30px 30px 30px 30px; /*Отступы*/
+    overflow: auto; /*Добавляется полоса прокрутки при необходимости*/
+}
+    /*Стиль для заголовочных ячеек (шрифт жирный)*/
+    .table_style th {
+        color: #EDB749;
+        border-bottom: 1px solid #37B5A5;
+        padding: 12px 17px;
+        background: #252F48;
+        border: 1px solid #000;
+    }
+    /*Стиль для основных ячеек*/
+    .table_style td {
+        border-bottom: 1px solid #000; /*Параметры для нижней границы ячейки*/ /*Толщина границы, сплошная линия, цвет границы*/
+        border-right: 1px solid #000; /*Параметры для правой границы ячейки*/ /*Толщина границы, сплошная линия, цвет границы*/
+        padding: 7px 17px; /*Устанавливает поле вокруг текста в ячейке. Верх-низ, право-лево*/
+        position: relative; /* Относительное позиционирование */
+    }
+    /*строка*/
+    .table_style tr:last-child td {
+        border-bottom: none;
+    }
+     
+    .table_style td:last-child {
+        border-right: none;
+    }
+
+    .table_style tr:hover td {
+        text-decoration: underline;
+    }
+
+    .table_style tr:hover {
+        background: #b09595;
+    }
+
+    .table_style tr:nth-child(1) {
+        background: #252F48;
+        color: #fff;
+    }
+.input_f {
+    margin: 30px 30px 30px 350px;
+    float: left;
+}
+.input {
+    margin: 30px 30px 30px 30px;
+    float:left;
+}
+.clearfix {
+    clear: both;
+}
+.my-small-heading {
+    margin: 50px 30px 50px 30px;
+    font-size: 18pt;
+    color: black;
+    font-weight: 700;
+    text-align: center;
+}
+
+.bColor {
+   /* text-align: center;*/
+    background: Tan; /* Фон */
+    color: black; /*Буквы */
+    font-size: 11pt; /* Размер шрифта*/
+    font-weight: 700;
+    height: 25px;
+    width: 170px;
+    margin: 20px
+}

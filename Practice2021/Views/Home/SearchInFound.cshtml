@@ -1,0 +1,97 @@
+﻿@model Practice2021.FoundStranger
+@{
+    Layout = null;
+}
+<html>
+<head>
+
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href='@Url.Content("~/Content/themes/base/jquery-ui.css")' rel="stylesheet" type="text/css" />
+    <script src='@Url.Content("~/Scripts/jquery-1.12.4.min.js")' type="text/javascript"></script>
+    <script src='@Url.Content("~/Scripts/jquery-ui-1.12.1.min.js")' type="text/javascript"></script>
+</head>
+<body>
+    <p style="margin-left:50px">@Html.ActionLink("Вернуться на главную страницу", "Index", "Home")</p>
+    <br>
+    <h3 class="my-small-heading">Проверить статус пропажи среди найденных</h3>
+    <br>
+
+
+    <br>
+    <div text-align: center>Вы ввели данные для поиска: </div>
+    <div>@Model.Surname @Model.Name @Model.Patronymic Дата рождения: @Model.DateOfBirth.ToShortDateString()  </div>
+
+    @*<script>
+                function () {
+
+                }
+        </script>
+        <div id="out_rez"> </div>*@
+    @if (ViewBag.Search == true)
+    {
+
+        <table id="viewTable" class="table_style">
+            <tr>
+                <td><p>Фамилия</p></td>
+                <td><p>Имя</p></td>
+                <td><p>Отчество</p></td>
+                <td><p>Дата рождения</p></td>
+                <td><p>Статус пропажи</p></td>
+                <td><p>Все данные</p></td>
+                <td><p>Фото</p></td>
+            </tr>
+            @*@if ( ! Page.IsPostBack )
+                {*@
+            @foreach (var b in ViewBag.People)
+            {
+                <tr>
+                    <td><p>@b.Surname</p></td>
+                    <td><p>@b.Name</p></td>
+                    <td><p>@b.Patronymic</p></td>
+                    <td><p>@b.DateOfBirth.ToShortDateString()</p></td>
+                    <td><p>Найден</p></td>
+                    <td><p>@Html.ActionLink("Показать", "Details", "FoundStrangers", new { id = b.FoundStrangerID }, new { @class = "viewDialog", data_dialog_title = "Полная информация" })</p></td>
+                    
+                    @if (b.Image != null)
+                    {
+                    <td>
+                        @Html.Raw("<img style='width:80px; height:60px;' src=\"data:image/jpeg;base64,"
+                                           + Convert.ToBase64String(b.Image) + "\" />")
+                    </td>
+                    }
+                </tr>
+                @*@ViewBag.People== null;*@
+            }
+            @*}*@
+        </table>
+    }
+    <script>
+        $(document).ready(function () {
+
+            $.ajaxSetup({ cache: false });
+
+            $(".viewDialog").on("click", function (e) {
+                e.preventDefault();
+
+                $("<div></div>")
+                    .addClass("dialog")
+                    .appendTo("body")
+                    .dialog({
+                        title: $(this).attr("data-dialog-title"),
+                        close: function () { $(this).remove() },
+                        modal: true,
+                        height: 500,
+                        width: 300,
+                        position: top
+                    })
+                    .load(this.href);
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,40 @@
+﻿@model Practice2021.SearchCampaign
+
+@using (Html.BeginForm("Add", "SearchCampaigns", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal" style="margin-left:50px">
+
+        <hr />
+        
+        <input name="id" value="@Model.MissingPersonID" hidden/>
+        <div class="form-group">
+            
+            <div class="col-md-10">
+                <label>Дата и время</label>
+                <input type="datetime-local" name="DateFound" min="4-10-2021" required="required">
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            
+            <div class="col-md-10">
+                <label>Место встречи</label>
+                @*<input name="location" required />*@
+                @Html.EditorFor(model => model.MeetingLocation, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.MeetingLocation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Сохранить" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Назад", "Index")
+</div>

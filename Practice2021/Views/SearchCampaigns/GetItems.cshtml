@@ -1,0 +1,15 @@
+﻿
+    <select id="ID" name="selectedID">
+        @foreach (var item in Model)
+        {
+            if (item is MissingPerson)
+            {
+                <option value="@item.MissingPersonID">@item.MissingPersonID</option>
+}
+            else
+            {
+                <option value="@item.SearchCampaignID">@item.SearchCampaignID</option>
+            }
+
+        }
+    </select>

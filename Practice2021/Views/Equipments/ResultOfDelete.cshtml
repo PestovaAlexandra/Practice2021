@@ -1,0 +1,14 @@
+﻿@if ((bool)ViewBag.Ok == true)
+{
+    <Font color="green" size=6>
+                                    Оборудование удалено!
+        Перейдите по @Html.ActionLink("ссылке", "Index", "Equipments"), чтобы вернуться к панели.
+    </Font>
+}
+@if ((bool)ViewBag.Ok == false)
+{
+<Font color="maroon" size=6> Ошибка, оборудование не удалено :( Повторите попытку.
+                Перейдите по @Html.ActionLink("ссылке", "Index", "Equipments"), чтобы вернуться к панели.
+</Font>
+}
+

@@ -1,0 +1,19 @@
+﻿@*@model IEnumerable<Practice2021.SearchCampaign>
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+    <textarea id="description1" rows="5" cols="80">
+
+        Набор оборудования  ID:@item.SetOfEquipment для поисковой группы номер @item.GroupOfVolunteer.ToString().
+        ID мероприятия: @item.SearchCampaignID дата и время сбора: @item.DateAndTime.ToShortDateString().Trim(),
+        место сбора: @item.MeetingLocation
+        ID пропавшего: @item.MissingPersonID.ToString(). @item.MissingPerson.Surname @item.MissingPerson.Name @item.MissingPerson.Patronymic @item.MissingPerson.DateOfBirth года рождения.
+        
+    }
+}
+else
+{
+    <textarea > Мероприятие не создано</textarea>
+}*@
+

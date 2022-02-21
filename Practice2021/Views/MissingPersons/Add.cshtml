@@ -1,0 +1,38 @@
+﻿@model Practice2021.MissingPerson
+
+@{
+    Layout = null;
+}
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label hidden>ID </label>
+            <div class="col-md-10" hidden>
+                @Html.EditorFor(model => model.MissingPersonID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MissingPersonID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+        <br />
+
+        <input type="date" name="DateFound" value="[@DateTime.Today]" min="[@DateTime.Today]" ," required="required">
+
+        <br />
+        <div class="form-group" method="post">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Сохранить" />
+            </div>
+        </div>
+        <br />
+        <br />
+        @if (ViewBag.Result != null && ViewBag.Result == true)
+        {
+            <font color="green">Данные сохранены!</font>
+        }
+    </div>
+}
+
+
+
+

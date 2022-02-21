@@ -1,0 +1,117 @@
+﻿@model Practice2021.FoundStranger
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<div class="ui attached message">
+    <div class="header" style="margin-left: 550px;">
+        <font size="5">Анкета найденного человека</font>
+    </div>
+    <div class="header" style="margin-left: 500px;">
+        <p><font size="4">Для подачи заявления заполните все поля</font></p>
+    </div>
+</div>
+@using (Html.BeginForm("Create", "FoundStrangers", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    @Html.ValidationSummary(true)
+    @*@Html.AntiForgeryToken()*@
+    @*<form enctype="multipart/form-data" method="post">*@
+<div class="form-horizontal" style="margin-left:50px">
+    <h4>Данные найденного человека</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", placeholder = "Фамилия" } })
+            @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Имя" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Patronymic, new { htmlAttributes = new { @class = "form-control", placeholder = "Отчество" } })
+            @Html.ValidationMessageFor(model => model.Patronymic, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br>
+    <div>Дата рождения </div>
+    <input type="date" name="DateOfBirth" value="1990-01-01" max="[@DateTime.Today]" required="required">
+    <br />
+    <br />
+    <br />
+    <div class="form-group">
+        <div class="col-md-10">
+            <div>Пол </div>
+            @Html.DropDownList("selectedGenderID", (SelectList)ViewBag.Gender)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <div>Текущее местоположение</div>
+            @Html.EditorFor(model => model.CurrentLocation, new { htmlAttributes = new { @class = "form-control", placeholder = "г. Пермь, ул. Ленина 1" } })
+            @Html.ValidationMessageFor(model => model.CurrentLocation, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br><br />
+    <h4>Контактная информация </h4>
+    <div class="form-group">
+        <div class="col-md-10">
+            <div>ФИО заявителя</div>
+            @Html.EditorFor(model => model.FullAplicant, new { htmlAttributes = new { @class = "form-control", placeholder = "Иванов Иван Иванович" } })
+            @Html.ValidationMessageFor(model => model.FullAplicant, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <div> Номер телефона </div>
+            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="editor-field">
+        <input type="file" name="uploadImage" />
+    </div>
+
+    <p>
+        <input type="submit" value="Добавить" />
+    </p>
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2", accept = "image/jpeg" })
+            <div class="col-md-10">
+                <input type="file" name="uploadImage" value="Загрузить" />
+            </div>
+        </div>*@
+    <br><br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Отправить анкету" @*class="btn btn-default"*@ />
+        </div>
+    </div>
+</div>
+        <div id="loading" style="display:none" color="maroon" size=4>
+            <p>Идет загрузка... </p>
+        </div>
+
+        <div id="results" color="green" size=4>
+
+
+        </div>
+        }
+    @*</form>*@
+}
+<div style="margin-left:50px">
+    <p>Вернуться на @Html.ActionLink("главную страницу", "Index", "Home")</p>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

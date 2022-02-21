@@ -1,0 +1,79 @@
+﻿@model Practice2021.StaffVolunteer
+
+@{
+    ViewBag.Title = "Reg";
+    Layout = "~/Views/Shared/RegLayout.cshtml";
+}
+
+<div class="ui attached message">
+    <div class="header" style="margin-left: 550px;">
+        <font size="5">Добро пожаловать на наш ресурс</font>
+    </div>
+    <div class="header" style="margin-left: 500px;">
+        <p><font size="4">Для регистрации нового пользователя, заполните все поля</font></p>
+    </div>
+</div>
+@*@using (Html.BeginForm("Reg", "Volunteer", FormMethod.Post, new { @class = "ui left floated left aligned form attached fluid segment error" }))*@
+@using (Ajax.BeginForm("VolunSearch", "Volunteer", new AjaxOptions
+{
+    UpdateTargetId = "results",
+    LoadingElementId = "loading",
+    LoadingElementDuration = 1000,
+
+
+}))
+{
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <p>@Html.ActionLink("Вернуться на главную страницу", "Index", "Home")</p>
+    <br />
+    <form>
+        <input type="text" class="form-control" id="Surname" name="Surname" placeholder="Фамилия" required>
+        <br />
+        <input type="text" class="form-control" id="Name" name="Name" placeholder="Имя" required>
+        <br />
+        <input type="text" class="form-control" id="Patronymic" name="Patronymic" placeholder="Отчество">
+        <br />
+        <div>Дата рождения </div>
+        <input type="date" name="DateOfBirth" value="2000-01-01" max="[@DateTime.Today]" required="required">
+        <br />
+        <br />
+        <div class="form-group">
+            <p>
+                @Html.Label("Пол:");
+                @Html.DropDownList("selectedGenderID", (SelectList)ViewBag.Gender)
+            </p>
+        </div>
+        <div>Номер телефона </div>
+        <input type="tel" class="form-control" id="PhoneNumber" name="PhoneNumber" pattern="^((\+7|7|8)+([0-9]{10}))$" placeholder="+7 (900) 123-45-67" required>
+        <br />
+        <input type="email" class="form-control" id="Email" name="Email" placeholder="name@yandex.ru" required>
+
+        <div id="results"></div>
+        <br />
+        <input type="text" class="form-control" id="Password" name="Password" placeholder="Пароль" required>
+        <br />
+        <div>Зарегистрироваться как администратор?</div>
+        <br />
+        <p><input class="form-check-input" type="radio" value="SuperYes" name="IsSuperUser" id="SuperYes"> Да </p>
+        <p><input class="form-check-input" type="radio" value="SuperNo" name="IsSuperUser" id="SuperNo" checked> Нет </p>
+        <br />
+        @*<p><a class="addLink"> Проверить e-mail на уникальность</a></p>*@
+        <input type="submit" value="Регистрация" @*class="ui blue submit button" name="submitButton"*@ @*onclick="showHiddenDiv();"*@ />
+
+    </form>
+    <br />
+    <div id="results"></div>
+
+    <div id="loading" style="display:none" color="red" ;font-weight:bold;">
+        <p>Идет загрузка... </p>
+    </div>
+}
+
+<div>
+    <p>Есть учетная запись? @Html.ActionLink("Войти", "Auth", "Volunteer") </p>
+</div>
+
+
+
